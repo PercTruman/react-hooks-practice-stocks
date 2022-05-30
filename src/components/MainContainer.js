@@ -9,10 +9,9 @@ function MainContainer() {
   useEffect(()=>{
     fetch ('http://localhost:3001/stocks')
     .then(res=>res.json())
-    .then(stocks=>setStocks(stocks))
+    .then(stockData=>setStocks(stockData))
   },[])
 
-  console.log({stocks})
   return (
     <div>
       <SearchBar />

@@ -2,7 +2,7 @@ import React from "react";
 import Stock from "./Stock";
 
 function StockContainer({stocks}) {
-  console.log({stocks})
+  console.log(stocks)
   const stockCards= stocks.map((stockCard)=>
   <Stock stockCard={stockCard}/>)
   return (
