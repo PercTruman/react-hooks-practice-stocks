@@ -9,8 +9,10 @@ function MainContainer() {
   useEffect(()=>{
     fetch ('http://localhost:3001/stocks')
     .then(res=>res.json())
-    .then(stockData=>setStocks(stockData))
+    .then(stocks=>setStocks(stocks))
   },[])
+
+  console.log({stocks})
   return (
     <div>
       <SearchBar />
@@ -19,7 +21,7 @@ function MainContainer() {
           <StockContainer stocks={stocks} setStocks={setStocks}/>
         </div>
         <div className="col-4">
-          <PortfolioContainer />
+          <PortfolioContainer stocks={stocks} setStocks={setStocks}/>
         </div>
       </div>
     </div>
