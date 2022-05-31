@@ -5,10 +5,8 @@ import SearchBar from "./SearchBar";
 
 function MainContainer() {
   const [stocks, setStocks] = useState([]);
+  const [addToPortfolio, setAddToPortfolio]= useState(false)
   
- 
- 
-
   useEffect(()=>{
     fetch ('http://localhost:3001/stocks')
     .then(res=>res.json())
@@ -20,10 +18,10 @@ function MainContainer() {
       <SearchBar />
       <div className="row">
         <div className="col-8">
-          <StockContainer stocks={stocks} setStocks={setStocks} />
+          <StockContainer stocks={stocks} setStocks={setStocks} addToPortfolio={addToPortfolio}/>
         </div>
         <div className="col-4">
-          <PortfolioContainer />
+          <PortfolioContainer stocks={stocks} addToPortfolio={addToPortfolio}/>
         </div>
       </div>
     </div>
