@@ -1,9 +1,23 @@
 import React from "react";
 import Stock from "./Stock";
 
-function StockContainer({stocks, portfolioCardArray, setPortfolioCardArray, isInPortfolio, setIsInPortfolio}) {
-  const cards = stocks.map((stockObj)=>
-  <Stock key={stockObj.id} stockObj={stockObj} portfolioCardArray={portfolioCardArray}  setPortfolioCardArray={setPortfolioCardArray} isInPortfolio={isInPortfolio} setIsInPortfolio={setIsInPortfolio}/>)
+function StockContainer({
+  stocks,
+  portfolioCardArray,
+  setPortfolioCardArray,
+  isInPortfolio,
+  setIsInPortfolio,
+}) {
+  const cards = stocks.map((stockObj) => (
+    <Stock
+      key={stockObj.id}
+      stockObj={stockObj}
+      portfolioCardArray={portfolioCardArray}
+      setPortfolioCardArray={setPortfolioCardArray}
+      isInPortfolio={isInPortfolio}
+      setIsInPortfolio={setIsInPortfolio}
+    />
+  ));
   return (
     <div>
       <h2>Stocks</h2>
