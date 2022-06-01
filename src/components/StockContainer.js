@@ -11,6 +11,7 @@ function StockContainer({
   const cards = stocks.map((stockObj) => (
     <Stock
       key={stockObj.id}
+      stocks={stocks}
       stockObj={stockObj}
       portfolioCardArray={portfolioCardArray}
       setPortfolioCardArray={setPortfolioCardArray}

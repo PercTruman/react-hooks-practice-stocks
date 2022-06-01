@@ -4,7 +4,6 @@ function Stock({
   stockObj,
   portfolioCardArray,
   setPortfolioCardArray,
-  isInPortfolio,
   setIsInPortfolio,
 }) {
   const { name, ticker, price } = stockObj;

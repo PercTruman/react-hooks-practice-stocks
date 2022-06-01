@@ -2,6 +2,7 @@ import React from "react";
 import Stock from "./Stock";
 
 function PortfolioContainer({
+  stocks,
   portfolioCardArray,
   setPortfolioCardArray,
   isInPortfolio,
@@ -10,6 +11,7 @@ function PortfolioContainer({
   const portfolioCards = portfolioCardArray.map((stockObj) => (
     <Stock
       key={stockObj.id}
+      stocks={stocks}
       stockObj={stockObj}
       portfolioCardArray={portfolioCardArray}
       setPortfolioCardArray={setPortfolioCardArray}

@@ -16,11 +16,16 @@ function MainContainer() {
       .then((stockData) => setStocks(stockData));
   }, []);
 
+  function handleStockFiltering(sortedArray){
+   setStocks([...sortedArray])
+  }
+
   return (
     <div>
           <SearchBar 
             stocks={stocks}
             setStocks={setStocks}
+            handleStockFiltering={handleStockFiltering}
             isFilteredByAlphabet={isFilteredByAlphabet} 
             setIsFilteredByAlphabet={setIsFilteredByAlphabet} 
             setIsFilteredByPrice={setIsFilteredByPrice}
