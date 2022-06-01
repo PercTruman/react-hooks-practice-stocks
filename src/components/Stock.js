@@ -1,16 +1,27 @@
 import React from "react";
 
-function Stock({name, ticker, price, setPortfolioCard}, portfolioCard) {
+function Stock({ stockObj, portfolioCardArray, setPortfolioCardArray, isInPortfolio, setIsInPortfolio }) {
+  const {name, ticker, price} = stockObj
 
-function handleClick(){
-  const newCard = [name,ticker,price]
-  console.log(newCard)
-  setPortfolioCard((portfolioCard)=>portfolioCard = newCard)
+
+ function handleClick(){
+  toggleIsInPortfolio();
+   const newObj = stockObj
+   const newPortfolioCardArray = [...portfolioCardArray, newObj]
+
+  if  (portfolioCardArray.includes(newObj))  {
+    return null 
+   }else {
+    setPortfolioCardArray(newPortfolioCardArray)
+   }
+ }
+function toggleIsInPortfolio(){
+  setIsInPortfolio((isInPortfolio) => isInPortfolio = !isInPortfolio)
 }
   return (
     <div >
-      <div className="card"  >
-        <div className="card-body" onClick={handleClick}>
+      <div className="card" onClick={handleClick} >
+        <div className="card-body" >
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{ticker}:{price}</p>
         </div>
