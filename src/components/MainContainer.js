@@ -7,6 +7,8 @@ function MainContainer() {
   const [stocks, setStocks] = useState([]);
   const [portfolioCardArray, setPortfolioCardArray] = useState([]);
   const [isInPortfolio, setIsInPortfolio] = useState(false);
+  const [isFilteredByAlphabet, setIsFilteredByAlphabet]=useState(false)
+  const [isFilteredByPrice, setIsFilteredByPrice]=useState(false)
 
   useEffect(() => {
     fetch("http://localhost:3001/stocks")
@@ -16,7 +18,13 @@ function MainContainer() {
 
   return (
     <div>
-      <SearchBar />
+          <SearchBar 
+            stocks={stocks}
+            setStocks={setStocks}
+            isFilteredByAlphabet={isFilteredByAlphabet} 
+            setIsFilteredByAlphabet={setIsFilteredByAlphabet} 
+            setIsFilteredByPrice={setIsFilteredByPrice}
+            isFilteredByPrice={isFilteredByPrice}/>
       <div className="row">
         <div className="col-8">
           <StockContainer

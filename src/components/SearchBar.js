@@ -1,6 +1,34 @@
 import React from "react";
 
-function SearchBar() {
+function SearchBar({
+  stocks,
+  setStocks,
+  isFilteredByAlphabet,
+  setIsFilteredByAlphabet,
+  setIsFilteredByPrice,
+  isFilteredByPrice,
+}) {
+  function handleChange(e) {
+    e.target.value === "Alphabetically"
+      ? sortByName(stocks)
+      : sortByPrice(stocks);
+
+    function sortByName(stocks) {
+      const stocksSortedByName = stocks.sort((a, b) =>
+        a.name < b.name ? -1 : 1
+      );
+      setStocks(stocksSortedByName);
+    }
+
+    function sortByPrice(stocks) {
+      const stocksSortedByPrice = stocks.sort((a, b) =>
+        a.price < b.price ? -1 : 1
+      );
+      console.log(stocksSortedByPrice)
+     setStocks(stocksSortedByPrice);
+    }
+  }
+
   return (
     <div>
       <strong>Sort by:</strong>
@@ -10,7 +38,7 @@ function SearchBar() {
           value="Alphabetically"
           name="sort"
           checked={null}
-          onChange={null}
+          onChange={handleChange}
         />
         Alphabetically
       </label>
@@ -20,7 +48,7 @@ function SearchBar() {
           value="Price"
           name="sort"
           checked={null}
-          onChange={null}
+          onChange={handleChange}
         />
         Price
       </label>
