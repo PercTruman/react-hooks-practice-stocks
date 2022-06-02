@@ -1,10 +1,11 @@
 import React from "react";
 
-function SearchBar({ stocks, handleStockFiltering }) {
+function SearchBar({ stocks, setStocks, handleStockFiltering, handleStockFilteringByCategory, stockData, resetStocksToFullList }) {
   function handleChange(e) {
     e.target.value === "Alphabetically"
       ? sortByName(stocks)
       : sortByPrice(stocks);
+  }
 
     function sortByName(stocks) {
       const stocksSortedByName = stocks.sort((a, b) =>
@@ -19,8 +20,40 @@ function SearchBar({ stocks, handleStockFiltering }) {
       );
      handleStockFiltering(stocksSortedByPrice);
     }
-  }
 
+    function handleFilterChange(e){
+      resetStocksToFullList()
+      const category = e.target.value
+      if (category === "Tech"){
+        filterByTech(stocks)
+        
+      }else if (category === "Sportswear"){
+        filterBySportswear(stocks)
+        
+      }else {
+        filterByFinance(stocks)
+        
+      }
+    }
+
+    function filterByTech(fullStockList){
+      console.log(fullStockList)
+      const stocksFilteredByCategory = fullStockList.filter(stock=>stock.type === "Tech")
+      handleStockFilteringByCategory(stocksFilteredByCategory)
+    }
+    function filterBySportswear(fullStockList){
+      const stocksFilteredByCategory = fullStockList.filter(stock=>stock.type === "Sportswear")
+      handleStockFilteringByCategory(stocksFilteredByCategory)
+    }
+    function filterByFinance(fullStockList){
+      const stocksFilteredByCategory = fullStockList.filter(stock=>stock.type === "Finance")
+      handleStockFilteringByCategory(stocksFilteredByCategory)
+    }
+  
+     
+  
+  
+    
   return (
     <div>
       <strong>Sort by:</strong>
@@ -47,7 +80,7 @@ function SearchBar({ stocks, handleStockFiltering }) {
       <br />
       <label>
         <strong>Filter:</strong>
-        <select onChange={null}>
+        <select onChange={handleFilterChange}>
           <option value="Tech">Tech</option>
           <option value="Sportswear">Sportswear</option>
           <option value="Finance">Finance</option>

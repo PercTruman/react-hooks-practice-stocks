@@ -7,17 +7,29 @@ function MainContainer() {
   const [stocks, setStocks] = useState([]);
   const [portfolioCardArray, setPortfolioCardArray] = useState([]);
   const [isInPortfolio, setIsInPortfolio] = useState(false);
-  const [isFilteredByAlphabet, setIsFilteredByAlphabet]=useState(false)
-  const [isFilteredByPrice, setIsFilteredByPrice]=useState(false)
+  const [filter, setFilter]=useState("Tech")
+
 
   useEffect(() => {
     fetch("http://localhost:3001/stocks")
       .then((res) => res.json())
-      .then((stockData) => setStocks(stockData));
+      .then((stockData) => {setStocks(stockData)
+        resetStocksToFullList(stockData)
+      });
   }, []);
 
+
+
+  function resetStocksToFullList(stockData){
+    console.log(stockData)
+    setStocks(stockData)
+  }
+  
   function handleStockFiltering(sortedArray){
    setStocks([...sortedArray])
+  }
+  function handleStockFilteringByCategory(filteredByCategoryArray){
+    setStocks([...filteredByCategoryArray])
   }
 
   return (
@@ -25,11 +37,10 @@ function MainContainer() {
           <SearchBar 
             stocks={stocks}
             setStocks={setStocks}
+            resetStocksToFullList={resetStocksToFullList}
             handleStockFiltering={handleStockFiltering}
-            isFilteredByAlphabet={isFilteredByAlphabet} 
-            setIsFilteredByAlphabet={setIsFilteredByAlphabet} 
-            setIsFilteredByPrice={setIsFilteredByPrice}
-            isFilteredByPrice={isFilteredByPrice}/>
+            handleStockFilteringByCategory={handleStockFilteringByCategory}
+          />
       <div className="row">
         <div className="col-8">
           <StockContainer
