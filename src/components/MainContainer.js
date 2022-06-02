@@ -7,22 +7,23 @@ function MainContainer() {
   const [stocks, setStocks] = useState([]);
   const [portfolioCardArray, setPortfolioCardArray] = useState([]);
   const [isInPortfolio, setIsInPortfolio] = useState(false);
-  const [filter, setFilter]=useState("Tech")
+  const [filterKey, setFilterKey]=useState(1)
 
 
   useEffect(() => {
     fetch("http://localhost:3001/stocks")
       .then((res) => res.json())
-      .then((stockData) => {setStocks(stockData)
-        resetStocksToFullList(stockData)
+      .then((stockData) => {
+        setStocks(stockData)
+        const unchangeableData=stockData
+        resetStocksToFullList(unchangeableData)
       });
   }, []);
 
 
-
-  function resetStocksToFullList(stockData){
-    console.log(stockData)
-    setStocks(stockData)
+  function resetStocksToFullList(unchangeableData){
+    console.log(unchangeableData)
+    setStocks(unchangeableData)
   }
   
   function handleStockFiltering(sortedArray){
@@ -31,11 +32,17 @@ function MainContainer() {
   function handleStockFilteringByCategory(filteredByCategoryArray){
     setStocks([...filteredByCategoryArray])
   }
+  function updateFilterKey(filterKey){
+    console.log(filterKey)
+    setFilterKey( filterKey => filterKey + 1)
+  }
 
   return (
     <div>
           <SearchBar 
             stocks={stocks}
+            filterKey={filterKey}
+            updateFilterKey={updateFilterKey}
             setStocks={setStocks}
             resetStocksToFullList={resetStocksToFullList}
             handleStockFiltering={handleStockFiltering}

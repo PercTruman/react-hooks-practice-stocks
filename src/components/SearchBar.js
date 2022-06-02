@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchBar({ stocks, setStocks, handleStockFiltering, handleStockFilteringByCategory, stockData, resetStocksToFullList }) {
+function SearchBar({ stocks, setStocks, updateFilterKey,filterKey, handleStockFiltering, handleStockFilteringByCategory, stockData, resetStocksToFullList }) {
   function handleChange(e) {
     e.target.value === "Alphabetically"
       ? sortByName(stocks)
@@ -21,8 +21,11 @@ function SearchBar({ stocks, setStocks, handleStockFiltering, handleStockFilteri
      handleStockFiltering(stocksSortedByPrice);
     }
 
+  
+
     function handleFilterChange(e){
       resetStocksToFullList()
+      updateFilterKey(filterKey)
       const category = e.target.value
       if (category === "Tech"){
         filterByTech(stocks)
@@ -32,21 +35,19 @@ function SearchBar({ stocks, setStocks, handleStockFiltering, handleStockFilteri
         
       }else {
         filterByFinance(stocks)
-        
       }
     }
 
-    function filterByTech(fullStockList){
-      console.log(fullStockList)
-      const stocksFilteredByCategory = fullStockList.filter(stock=>stock.type === "Tech")
+    function filterByTech(stocks){
+      const stocksFilteredByCategory = stocks.filter(stock=>stock.type === "Tech")
       handleStockFilteringByCategory(stocksFilteredByCategory)
     }
-    function filterBySportswear(fullStockList){
-      const stocksFilteredByCategory = fullStockList.filter(stock=>stock.type === "Sportswear")
+    function filterBySportswear(stocks){
+      const stocksFilteredByCategory = stocks.filter(stock=>stock.type === "Sportswear")
       handleStockFilteringByCategory(stocksFilteredByCategory)
     }
-    function filterByFinance(fullStockList){
-      const stocksFilteredByCategory = fullStockList.filter(stock=>stock.type === "Finance")
+    function filterByFinance(stocks){
+      const stocksFilteredByCategory = stocks.filter(stock=>stock.type === "Finance")
       handleStockFilteringByCategory(stocksFilteredByCategory)
     }
   
@@ -80,7 +81,7 @@ function SearchBar({ stocks, setStocks, handleStockFiltering, handleStockFilteri
       <br />
       <label>
         <strong>Filter:</strong>
-        <select onChange={handleFilterChange}>
+        <select key={filterKey} onChange={handleFilterChange}>
           <option value="Tech">Tech</option>
           <option value="Sportswear">Sportswear</option>
           <option value="Finance">Finance</option>
