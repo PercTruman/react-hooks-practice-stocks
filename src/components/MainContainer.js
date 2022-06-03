@@ -7,51 +7,28 @@ function MainContainer() {
   const [stocks, setStocks] = useState([]);
   const [portfolioCardArray, setPortfolioCardArray] = useState([]);
   const [isInPortfolio, setIsInPortfolio] = useState(false);
-  const [filterKey, setFilterKey]=useState(1)
-
+  const [sortBy, setSortBy] = useState("");
+  const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:3001/stocks")
       .then((res) => res.json())
-      .then((stockData) => {
-        setStocks(stockData)
-        const unchangeableData=stockData
-        resetStocksToFullList(unchangeableData)
-      });
+      .then((stockData) => setStocks(stockData));
   }, []);
 
-
-  function resetStocksToFullList(unchangeableData){
-    console.log(unchangeableData)
-    setStocks(unchangeableData)
-  }
   
-  function handleStockFiltering(sortedArray){
-   setStocks([...sortedArray])
-  }
-  function handleStockFilteringByCategory(filteredByCategoryArray){
-    setStocks([...filteredByCategoryArray])
-  }
-  function updateFilterKey(filterKey){
-    console.log(filterKey)
-    setFilterKey( filterKey => filterKey + 1)
-  }
+
+  const filteredAndSortedStocks = stocks
+    .filter((stock) => !filterValue || stock.type === filterValue)
+    .sort((a, b) => a[sortBy] < b[sortBy] ? -1 : 1);
 
   return (
     <div>
-          <SearchBar 
-            stocks={stocks}
-            filterKey={filterKey}
-            updateFilterKey={updateFilterKey}
-            setStocks={setStocks}
-            resetStocksToFullList={resetStocksToFullList}
-            handleStockFiltering={handleStockFiltering}
-            handleStockFilteringByCategory={handleStockFilteringByCategory}
-          />
+      <SearchBar onChangeFilter={setFilterValue} onChangeSortBy={setSortBy} />
       <div className="row">
         <div className="col-8">
           <StockContainer
-            stocks={stocks}
+            stocks={filteredAndSortedStocks}
             setStocks={setStocks}
             portfolioCardArray={portfolioCardArray}
             setPortfolioCardArray={setPortfolioCardArray}
@@ -64,6 +41,7 @@ function MainContainer() {
             stocks={stocks}
             portfolioCardArray={portfolioCardArray}
             setPortfolioCardArray={setPortfolioCardArray}
+            s
             isInPortfolio={isInPortfolio}
             setIsInPortfolio={setIsInPortfolio}
           />
