@@ -1,10 +1,6 @@
 import React from "react";
 
 function SearchBar({ onChangeFilter, onChangeSortBy}){
-  //   e.target.value === "Alphabetically"
-  //     ? sortByName(stocks)
-  //     : sortByPrice(stocks);
-  // }
   function handleChange(e) {
     onChangeSortBy(e.target.value)
   }
@@ -13,45 +9,7 @@ function SearchBar({ onChangeFilter, onChangeSortBy}){
     onChangeFilter(e.target.value)
   }
 
-    // function sortByName(stocks) {
-    //   const stocksSortedByName = stocks.sort((a, b) =>
-    //     a.name < b.name ? -1 : 1
-    //   );
-    //   handleStockFiltering(stocksSortedByName);
-    // }
-
-    // function sortByPrice(stocks) {
-    //   const stocksSortedByPrice = stocks.sort((a, b) =>
-    //     a.price < b.price ? -1 : 1
-    //   );
-    //  handleStockFiltering(stocksSortedByPrice);
-    // }
-
-  // function handleFilterChange(e){
-    // const category = e.target.value
-    //   if (category === "Tech"){
-    //     filterByTech(stocks)
-        
-    //   }else if (category === "Sportswear"){
-    //     filterBySportswear(stocks)
-        
-    //   }else {
-    //     filterByFinance(stocks)
-    //   }
-    // }
-
-    // function filterByTech(stocks){
-    //   const stocksFilteredByCategory = stocks.filter(stock=>stock.type === "Tech")
-    //   handleStockFilteringByCategory(stocksFilteredByCategory)
-    // }
-    // function filterBySportswear(stocks){
-    //   const stocksFilteredByCategory = stocks.filter(stock=>stock.type === "Sportswear")
-    //   handleStockFilteringByCategory(stocksFilteredByCategory)
-    // }
-    // function filterByFinance(stocks){
-    //   const stocksFilteredByCategory = stocks.filter(stock=>stock.type === "Finance")
-    //   handleStockFilteringByCategory(stocksFilteredByCategory)
-    // }
+    
   
     return (
     <div>

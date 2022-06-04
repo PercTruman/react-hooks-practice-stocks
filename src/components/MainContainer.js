@@ -20,7 +20,9 @@ function MainContainer() {
 
   const filteredAndSortedStocks = stocks
     .filter((stock) => !filterValue || stock.type === filterValue)
-    .sort((a, b) => a[sortBy] < b[sortBy] ? -1 : 1);
+    .sort((a, b) => sortBy === "Alphabetically" ? (a.name< b.name) ? -1 : 1
+          : (a.price <b.price) ? -1 : 1);
+    
 
   return (
     <div>
